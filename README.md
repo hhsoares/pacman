@@ -1,1 +1,1 @@
-# Pac-Man-Clone
+# pacman
