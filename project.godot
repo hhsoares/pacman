@@ -10,6 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Pac-Man Clone"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/name="Pac-Man"
+run/main_scene="uid://d0te4yyd7y1hg"
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=224
+window/size/viewport_height=228
