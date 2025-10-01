@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=4 uid="uid://d0te4yyd7y1hg"]
+[gd_scene load_steps=5 format=4 uid="uid://d0te4yyd7y1hg"]
 
-[ext_resource type="Texture2D" uid="uid://byxjh4tv4gp1x" path="res://assets/Wall_Atlas.png" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://byxjh4tv4gp1x" path="res://assets/maze/Wall_Atlas.png" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://c24y5jtiq6cw7" path="res://scenes/pacman.tscn" id="2_0wfyh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -169,3 +170,5 @@ tile_map_data = PackedByteArray("AAD///3/AAACAAIAAAAAAP3/AAACAAIAAAABAP3/AAADAAM
 tile_set = SubResource("TileSet_sugp2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Pac-Man" parent="." instance=ExtResource("2_0wfyh")]
