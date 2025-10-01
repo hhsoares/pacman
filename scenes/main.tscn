@@ -210,5 +210,6 @@ tile_set = SubResource("TileSet_sugp2")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Pac-Man" parent="." instance=ExtResource("2_0wfyh")]
-position = Vector2(0, 61)
+position = Vector2(0, 204)
+scale = Vector2(3.42, 3.42)
 collision_mask = 14
