@@ -20,6 +20,13 @@ config/icon="res://icon.svg"
 window/size/viewport_width=224
 window/size/viewport_height=228
 
+[layer_names]
+
+2d_physics/layer_1="Pacman"
+2d_physics/layer_2="Wall"
+2d_physics/layer_3="SmallPellet"
+2d_physics/layer_4="BigPellet"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
