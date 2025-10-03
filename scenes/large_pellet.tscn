@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhfp717kv0gm4"]
+
+[ext_resource type="Texture2D" uid="uid://dmfvnxqkjpgev" path="res://assets/pellets/Pellet_Large.png" id="1_fs8at"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15t1q"]
+size = Vector2(24, 24)
+
+[node name="Large Pellet" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fs8at")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_15t1q")
