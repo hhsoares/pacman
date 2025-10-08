@@ -18,14 +18,14 @@ func _ready():
 
 func _physics_process(delta):
 	get_input()
-	
+
 	if movement_direction == Vector2.ZERO:
 		movement_direction = next_movement_direction
 	if can_move_in_direction(next_movement_direction, delta):
 		movement_direction = next_movement_direction
-	
+
 	velocity = movement_direction * speed
-	
+
 	if movement_direction == Vector2.ZERO or not can_move_in_direction(movement_direction, delta):
 		_animated_sprite.play("stop")
 	else:
