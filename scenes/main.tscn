@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=4 uid="uid://d0te4yyd7y1hg"]
+[gd_scene load_steps=25 format=4 uid="uid://d0te4yyd7y1hg"]
 
 [ext_resource type="Texture2D" uid="uid://byxjh4tv4gp1x" path="res://assets/maze/Wall_Atlas.png" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c24y5jtiq6cw7" path="res://scenes/pacman.tscn" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://dm1g2ko2golj6" path="res://assets/pellets/pellets.png" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bdg863xiowmff" path="res://scenes/pellet.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bo0xse5jxa7xd" path="res://scenes/connector.tscn" id="5_tbgi4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_choun"]
 vertices = PackedVector2Array(1.5, -1.5, 12, -1.5, 12, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -12, 1.5, -12)
@@ -249,3 +250,5 @@ collision_mask = 14
 
 [node name="Pellet" parent="Pellets" instance=ExtResource("3_sugp2")]
 position = Vector2(-180, -12)
+
+[node name="Connector" parent="." instance=ExtResource("5_tbgi4")]
