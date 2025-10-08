@@ -10,6 +10,7 @@ var shape_query = PhysicsShapeQueryParameters2D.new()
 
 @onready var direction_pointer = $DirectionPointer
 @onready var collision_shape_2d = $CollisionShape2D
+@onready var _animated_sprite = $AnimatedSprite2D
 
 func _ready():
 	shape_query.shape = collision_shape_2d.shape
@@ -24,6 +25,12 @@ func _physics_process(delta):
 		movement_direction = next_movement_direction
 	
 	velocity = movement_direction * speed
+	
+	if movement_direction == Vector2.ZERO or not can_move_in_direction(movement_direction, delta):
+		_animated_sprite.play("stop")
+	else:
+		_animated_sprite.play("moving")
+
 	move_and_slide()
 
 func get_input():

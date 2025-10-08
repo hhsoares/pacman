@@ -1,8 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://c24y5jtiq6cw7"]
+[gd_scene load_steps=8 format=3 uid="uid://c24y5jtiq6cw7"]
 
 [ext_resource type="Texture2D" uid="uid://ori6ugg2brh5" path="res://assets/pacman/Pacman_02.png" id="1_kcrxf"]
 [ext_resource type="Script" uid="uid://b565xb350nxfx" path="res://scripts/pacman.gd" id="1_kjyp3"]
+[ext_resource type="Texture2D" uid="uid://bji4512v5sotf" path="res://assets/pacman/Pacman_01.png" id="2_ceynl"]
 [ext_resource type="Texture2D" uid="uid://cjw601pda3ud0" path="res://assets/pacman/direction_pointer.png" id="3_utpjb"]
+[ext_resource type="Texture2D" uid="uid://cg43ys2s8vi3k" path="res://assets/pacman/Pacman_03.png" id="4_47rue"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rx8a7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ceynl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_kcrxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_47rue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_kcrxf")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kcrxf")
+}],
+"loop": true,
+"name": &"stop",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kcrxf"]
 radius = 7.0
@@ -10,9 +40,11 @@ radius = 7.0
 [node name="Pac-Man" type="CharacterBody2D"]
 script = ExtResource("1_kjyp3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(-1, -1)
-texture = ExtResource("1_kcrxf")
+sprite_frames = SubResource("SpriteFrames_rx8a7")
+animation = &"stop"
+speed_scale = 2.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kcrxf")
