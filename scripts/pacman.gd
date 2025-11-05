@@ -13,6 +13,9 @@ var shape_query = PhysicsShapeQueryParameters2D.new()
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var pellets: TileMapLayer = $"../Pellets"
 
+var score: int = 0
+@onready var scoreUI: Label = $"../1UP"
+
 func _ready():
 	shape_query.shape = collision_shape_2d.shape
 	shape_query.collision_mask = 2
@@ -54,6 +57,12 @@ func can_move_in_direction(dir: Vector2, delta: float) -> bool:
 	var result = get_world_2d().direct_space_state.intersect_shape(shape_query)
 	return result.size() == 0
 
+func update_score(value: int) -> void:
+	score += value
+	if score > 999999:
+		score = 999999
+	scoreUI.text = str(score).pad_zeros(2)
+
 func check_pellet() -> void:
 	var cell: Vector2i = pellets.local_to_map(global_position)
 
@@ -68,9 +77,9 @@ func check_pellet() -> void:
 
 	match pellet_type:
 		"small":
-			print("small")
+			update_score(10)
 		"big":
-			print("big")
+			update_score(50)
 
 	pellets.erase_cell(cell)
 
