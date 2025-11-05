@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var blink_interval: float = 0.17
+@export var blink_interval: float = 0.25
 
 var blink_timer: Timer
 
