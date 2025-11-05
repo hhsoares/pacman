@@ -11,6 +11,7 @@ var shape_query = PhysicsShapeQueryParameters2D.new()
 @onready var direction_pointer = $DirectionPointer
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var pellets: TileMapLayer = $"../Pellets"
 
 func _ready():
 	shape_query.shape = collision_shape_2d.shape
@@ -32,6 +33,7 @@ func _physics_process(delta):
 		_animated_sprite.play("moving")
 
 	move_and_slide()
+	check_pellet()
 
 func get_input():
 	if Input.is_action_pressed("ui_left"):
@@ -51,3 +53,26 @@ func can_move_in_direction(dir: Vector2, delta: float) -> bool:
 	shape_query.transform = global_transform.translated(dir * speed * delta * 2)
 	var result = get_world_2d().direct_space_state.intersect_shape(shape_query)
 	return result.size() == 0
+
+func check_pellet() -> void:
+	var cell: Vector2i = pellets.local_to_map(global_position)
+
+	if pellets.get_cell_source_id(cell) == -1:
+		return
+
+	var data := pellets.get_cell_tile_data(cell)
+	if data == null:
+		return
+
+	var pellet_type : String = data.get_custom_data("pellet_type")
+
+	match pellet_type:
+		"small":
+			print("small")
+		"big":
+			print("big")
+
+	pellets.erase_cell(cell)
+
+	if pellets.get_used_cells().is_empty():
+		print("All cells collected")
