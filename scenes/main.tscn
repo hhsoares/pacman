@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://d0te4yyd7y1hg"]
+[gd_scene load_steps=27 format=4 uid="uid://d0te4yyd7y1hg"]
 
 [ext_resource type="Texture2D" uid="uid://byxjh4tv4gp1x" path="res://assets/maze/Wall_Atlas.png" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c24y5jtiq6cw7" path="res://scenes/pacman.tscn" id="2_0wfyh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://uflxl4agly12" path="res://assets/misc/black_tile.png" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://c3w0ayuvqfqkn" path="res://scripts/blinking.gd" id="3_tefeu"]
 [ext_resource type="PackedScene" uid="uid://bo0xse5jxa7xd" path="res://scenes/connector.tscn" id="5_tbgi4"]
+[ext_resource type="FontFile" uid="uid://iq40p0olscaa" path="res://assets/fonts/namco-arcade-raster.otf" id="7_o6xl0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_choun"]
 vertices = PackedVector2Array(1.5, -1.5, 12, -1.5, 12, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -12, 1.5, -12)
@@ -268,3 +269,45 @@ scale = Vector2(3.42, 3.42)
 collision_mask = 14
 
 [node name="Connector" parent="." instance=ExtResource("5_tbgi4")]
+
+[node name="1UPText" type="Label" parent="."]
+offset_left = -302.0
+offset_top = -447.0
+offset_right = -154.0
+offset_bottom = -424.0
+theme_override_fonts/font = ExtResource("7_o6xl0")
+theme_override_font_sizes/font_size = 20
+text = "1UP"
+horizontal_alignment = 1
+
+[node name="HighScoreText" type="Label" parent="."]
+offset_left = -102.0
+offset_top = -447.0
+offset_right = 103.0
+offset_bottom = -424.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("7_o6xl0")
+theme_override_font_sizes/font_size = 20
+text = "HIGH SCORE"
+horizontal_alignment = 1
+
+[node name="1UP" type="Label" parent="."]
+offset_left = -312.0
+offset_top = -424.0
+offset_right = -164.0
+offset_bottom = -397.0
+theme_override_fonts/font = ExtResource("7_o6xl0")
+theme_override_font_sizes/font_size = 24
+text = "000000"
+horizontal_alignment = 1
+
+[node name="HighScore" type="Label" parent="."]
+offset_left = -102.0
+offset_top = -421.0
+offset_right = 103.0
+offset_bottom = -394.0
+theme_override_fonts/font = ExtResource("7_o6xl0")
+theme_override_font_sizes/font_size = 24
+text = "000000"
+horizontal_alignment = 1
