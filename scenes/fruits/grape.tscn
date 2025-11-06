@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8qhrmaf62gg5"]
+
+[ext_resource type="Texture2D" uid="uid://cgqmx2ojvidmj" path="res://assets/fruits/Grape.png" id="1_2gjhy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
+size = Vector2(11, 14)
+
+[node name="Grape" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2gjhy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ghwtm")

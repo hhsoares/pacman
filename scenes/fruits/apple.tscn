@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdxybtisyhpmp"]
+
+[ext_resource type="Texture2D" uid="uid://cxlj152o7o4a0" path="res://assets/fruits/Apple.png" id="1_m5h0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
+size = Vector2(12, 12)
+
+[node name="Apple" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m5h0i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ghwtm")

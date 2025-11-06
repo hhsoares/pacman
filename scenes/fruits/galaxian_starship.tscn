@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://br1eyb3x23sdf"]
+
+[ext_resource type="Texture2D" uid="uid://ep24ux4wsuyt" path="res://assets/fruits/GalaxianStarship.png" id="1_3wyjo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
+size = Vector2(11, 11)
+
+[node name="Galaxy Starship" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3wyjo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ghwtm")

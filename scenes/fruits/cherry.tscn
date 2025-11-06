@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca5bp5j8c2xrw"]
+
+[ext_resource type="Texture2D" uid="uid://duhwxhddym1s1" path="res://assets/fruits/Cherry.png" id="1_fhtug"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
+size = Vector2(12, 12)
+
+[node name="Cherry" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fhtug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ghwtm")

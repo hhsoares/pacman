@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwfgvwr1n1qln"]
+
+[ext_resource type="Texture2D" uid="uid://cio36od34ggbq" path="res://assets/fruits/Bell.png" id="1_3kmub"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
+size = Vector2(12, 13)
+
+[node name="Bell" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3kmub")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ghwtm")

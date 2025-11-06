@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cenepiu8gl4dh"]
+
+[ext_resource type="Texture2D" uid="uid://b6rl0mwk2sk5m" path="res://assets/fruits/Peach.png" id="1_yur1w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
+size = Vector2(12, 12)
+
+[node name="Peach" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yur1w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ghwtm")

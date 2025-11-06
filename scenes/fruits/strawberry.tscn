@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjtykrtswglli"]
+
+[ext_resource type="Texture2D" uid="uid://bu1kphinysb26" path="res://assets/fruits/Strawberry.png" id="1_mxbrp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
+size = Vector2(11, 12)
+
+[node name="Strawberry" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mxbrp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ghwtm")
