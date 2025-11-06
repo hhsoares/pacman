@@ -13,7 +13,6 @@ var shape_query = PhysicsShapeQueryParameters2D.new()
 @onready var pellets: TileMapLayer = $"../Pellets"
 
 @onready var score: int = 0
-#@onready var high_score: int = Globals.high_score
 @onready var scoreUI: Label = $"../1UP"
 @onready var highScoreUI: Label = $"../HighScore"
 
@@ -59,13 +58,13 @@ func can_move_in_direction(dir: Vector2, delta: float) -> bool:
 	return result.size() == 0
 
 func update_score(value: int) -> void:
-	score += value
-	if score > 999999:
-		score = 999999
-	scoreUI.text = str(score).pad_zeros(2)
+	Globals.score += value
+	if Globals.score > 999999:
+		Globals.score = 999999
+	scoreUI.text = str(Globals.score).pad_zeros(2)
 
-	if score > Globals.high_score:
-		Globals.high_score = score
+	if Globals.score > Globals.high_score:
+		Globals.high_score = Globals.score
 	highScoreUI.text = str(Globals.high_score).pad_zeros(2)
 
 func check_pellet() -> void:
