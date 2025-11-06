@@ -5,6 +5,7 @@ class_name Pacman
 var next_movement_direction = Vector2.ZERO
 var movement_direction = Vector2.ZERO
 var shape_query = PhysicsShapeQueryParameters2D.new()
+
 @export var speed = 300
 
 @onready var direction_pointer = $DirectionPointer
@@ -19,6 +20,10 @@ var shape_query = PhysicsShapeQueryParameters2D.new()
 func _ready():
 	shape_query.shape = collision_shape_2d.shape
 	shape_query.collision_mask = 2
+	print("Current level: ", Globals.level)
+	
+	check_speed()
+	print("Current speed: ", speed)
 
 func _physics_process(delta):
 	get_input()
@@ -67,6 +72,12 @@ func update_score(value: int) -> void:
 		Globals.high_score = Globals.score
 	highScoreUI.text = str(Globals.high_score).pad_zeros(2)
 
+func check_speed() -> void:
+	if Globals.level < 2:
+		speed = speed * 0.8
+	elif Globals.level < 5 or Globals.level > 20:
+		speed = speed * 0.9
+
 func check_pellet() -> void:
 	var cell: Vector2i = pellets.local_to_map(global_position)
 
@@ -89,4 +100,5 @@ func check_pellet() -> void:
 
 	if pellets.get_used_cells().is_empty():
 		print("All cells collected")
+		Globals.level += 1
 		get_tree().reload_current_scene()
