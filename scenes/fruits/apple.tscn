@@ -6,6 +6,7 @@
 size = Vector2(12, 12)
 
 [node name="Apple" type="Area2D"]
+scale = Vector2(3, 3)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_m5h0i")

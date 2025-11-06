@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://d0te4yyd7y1hg"]
+[gd_scene load_steps=35 format=4 uid="uid://d0te4yyd7y1hg"]
 
 [ext_resource type="Texture2D" uid="uid://byxjh4tv4gp1x" path="res://assets/maze/Wall_Atlas.png" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c24y5jtiq6cw7" path="res://scenes/pacman.tscn" id="2_0wfyh"]
@@ -7,6 +7,14 @@
 [ext_resource type="Script" uid="uid://c3w0ayuvqfqkn" path="res://scripts/blinking.gd" id="3_tefeu"]
 [ext_resource type="PackedScene" uid="uid://bo0xse5jxa7xd" path="res://scenes/connector.tscn" id="5_tbgi4"]
 [ext_resource type="FontFile" uid="uid://iq40p0olscaa" path="res://assets/fonts/namco-arcade-raster.otf" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://ca5bp5j8c2xrw" path="res://scenes/fruits/cherry.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://bjtykrtswglli" path="res://scenes/fruits/strawberry.tscn" id="9_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://cenepiu8gl4dh" path="res://scenes/fruits/peach.tscn" id="10_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://bdxybtisyhpmp" path="res://scenes/fruits/apple.tscn" id="11_muem4"]
+[ext_resource type="PackedScene" uid="uid://b8qhrmaf62gg5" path="res://scenes/fruits/grape.tscn" id="12_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://br1eyb3x23sdf" path="res://scenes/fruits/galaxian_starship.tscn" id="13_0ld40"]
+[ext_resource type="PackedScene" uid="uid://bwfgvwr1n1qln" path="res://scenes/fruits/bell.tscn" id="14_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://cw08dvpmi107v" path="res://scenes/fruits/key.tscn" id="15_yc10j"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_choun"]
 vertices = PackedVector2Array(1.5, -1.5, 12, -1.5, 12, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -12, 1.5, -12)
@@ -314,7 +322,18 @@ position = Vector2(-230, -436)
 scale = Vector2(3.25, 1)
 texture = ExtResource("3_tbgi4")
 
+[node name="Fruit Spawn Point" type="Node2D" parent="."]
+position = Vector2(0, 61)
+
 [node name="Pac-Man" parent="." instance=ExtResource("2_0wfyh")]
 position = Vector2(0, 204)
 scale = Vector2(3.42, 3.42)
 collision_mask = 14
+cherries_scene = ExtResource("8_tipki")
+strawberry_scene = ExtResource("9_jkv2x")
+peach_scene = ExtResource("10_jbj1t")
+apple_scene = ExtResource("11_muem4")
+grapes_scene = ExtResource("12_dp3eg")
+galaxian_scene = ExtResource("13_0ld40")
+bell_scene = ExtResource("14_gqmmt")
+key_scene = ExtResource("15_yc10j")
