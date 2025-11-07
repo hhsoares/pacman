@@ -1,7 +1,7 @@
 extends Area2D
 class_name Fruit
 
-@export var score_value: int = 100  # set per fruit in the editor
+@export var score_value: int = 100
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)

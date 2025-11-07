@@ -24,7 +24,7 @@ var shape_query = PhysicsShapeQueryParameters2D.new()
 @export var bell_scene: PackedScene
 @export var key_scene: PackedScene
 
-var pellets_eaten: int = 70
+var pellets_eaten: int = 0
 var first_fruit_spawned: bool = false
 var second_fruit_spawned: bool = false
 
