@@ -256,8 +256,6 @@ navigation_enabled = false
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.812, 0.812)
 
-[node name="Connector" parent="." instance=ExtResource("5_tbgi4")]
-
 [node name="1UPText" type="Label" parent="."]
 offset_left = -302.0
 offset_top = -447.0
@@ -337,3 +335,6 @@ grapes_scene = ExtResource("12_dp3eg")
 galaxian_scene = ExtResource("13_0ld40")
 bell_scene = ExtResource("14_gqmmt")
 key_scene = ExtResource("15_yc10j")
+
+[node name="Connector" parent="." instance=ExtResource("5_tbgi4")]
+position = Vector2(-1, 0)
