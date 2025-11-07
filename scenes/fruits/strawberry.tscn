@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjtykrtswglli"]
+[gd_scene load_steps=4 format=3 uid="uid://bjtykrtswglli"]
 
+[ext_resource type="Script" uid="uid://chw5sa42235vi" path="res://scripts/fruit.gd" id="1_fbxwq"]
 [ext_resource type="Texture2D" uid="uid://bu1kphinysb26" path="res://assets/fruits/Strawberry.png" id="1_mxbrp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
@@ -7,6 +8,8 @@ size = Vector2(11, 12)
 
 [node name="Strawberry" type="Area2D"]
 scale = Vector2(3, 3)
+script = ExtResource("1_fbxwq")
+score_value = 300
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_mxbrp")

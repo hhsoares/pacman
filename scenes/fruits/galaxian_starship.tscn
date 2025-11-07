@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://br1eyb3x23sdf"]
+[gd_scene load_steps=4 format=3 uid="uid://br1eyb3x23sdf"]
 
 [ext_resource type="Texture2D" uid="uid://ep24ux4wsuyt" path="res://assets/fruits/GalaxianStarship.png" id="1_3wyjo"]
+[ext_resource type="Script" uid="uid://chw5sa42235vi" path="res://scripts/fruit.gd" id="1_pslqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
 size = Vector2(11, 11)
 
 [node name="Galaxy Starship" type="Area2D"]
 scale = Vector2(3, 3)
+script = ExtResource("1_pslqr")
+score_value = 2000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3wyjo")

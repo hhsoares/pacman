@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8qhrmaf62gg5"]
+[gd_scene load_steps=4 format=3 uid="uid://b8qhrmaf62gg5"]
 
 [ext_resource type="Texture2D" uid="uid://cgqmx2ojvidmj" path="res://assets/fruits/Grape.png" id="1_2gjhy"]
+[ext_resource type="Script" uid="uid://chw5sa42235vi" path="res://scripts/fruit.gd" id="1_ax5xb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghwtm"]
 size = Vector2(11, 14)
 
 [node name="Grape" type="Area2D"]
 scale = Vector2(3, 3)
+script = ExtResource("1_ax5xb")
+score_value = 1000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_2gjhy")
