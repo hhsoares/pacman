@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://d0te4yyd7y1hg"]
+[gd_scene load_steps=36 format=4 uid="uid://d0te4yyd7y1hg"]
 
 [ext_resource type="Texture2D" uid="uid://byxjh4tv4gp1x" path="res://assets/maze/Wall_Atlas.png" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c24y5jtiq6cw7" path="res://scenes/pacman.tscn" id="2_0wfyh"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://br1eyb3x23sdf" path="res://scenes/fruits/galaxian_starship.tscn" id="13_0ld40"]
 [ext_resource type="PackedScene" uid="uid://bwfgvwr1n1qln" path="res://scenes/fruits/bell.tscn" id="14_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://cw08dvpmi107v" path="res://scenes/fruits/key.tscn" id="15_yc10j"]
+[ext_resource type="AudioStream" uid="uid://dnw1biwxcw5x5" path="res://assets/sounds/pacman_beginning.wav" id="16_jbj1t"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_choun"]
 vertices = PackedVector2Array(1.5, -1.5, 12, -1.5, 12, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -12, 1.5, -12)
@@ -338,3 +339,7 @@ key_scene = ExtResource("15_yc10j")
 
 [node name="Connector" parent="." instance=ExtResource("5_tbgi4")]
 position = Vector2(-1, 0)
+
+[node name="Startup Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_jbj1t")
+volume_db = -20.0

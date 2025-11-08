@@ -14,7 +14,6 @@ var shape_query = PhysicsShapeQueryParameters2D.new()
 @onready var pellets: TileMapLayer = $"../Pellets"
 @onready var fruit_spawn_point: Node2D = $"../Fruit Spawn Point"
 
-# fruit scenes
 @export var cherries_scene: PackedScene
 @export var strawberry_scene: PackedScene
 @export var peach_scene: PackedScene
@@ -31,7 +30,13 @@ var second_fruit_spawned: bool = false
 @onready var scoreUI: Label = $"../1UP"
 @onready var highScoreUI: Label = $"../HighScore"
 
+@onready var startupSound: AudioStreamPlayer = $"../Startup Sound"
+
 func _ready() -> void:
+	if not Globals.startup_played:
+		startupSound.play()
+		Globals.startup_played = true
+
 	shape_query.shape = collision_shape_2d.shape
 	shape_query.collision_mask = 2
 	print("Current level:", Globals.level)
