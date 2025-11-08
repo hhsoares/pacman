@@ -297,6 +297,30 @@ theme_override_fonts/font = ExtResource("7_o6xl0")
 theme_override_font_sizes/font_size = 21
 horizontal_alignment = 2
 
+[node name="PlayerOne" type="Label" parent="."]
+offset_left = -127.0
+offset_top = -107.0
+offset_right = 132.0
+offset_bottom = -60.0
+theme_override_colors/font_color = Color(0.09019608, 0.94509804, 0.8980392, 1)
+theme_override_fonts/font = ExtResource("7_o6xl0")
+theme_override_font_sizes/font_size = 24
+text = "PLAYER ONE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="."]
+offset_left = -132.0
+offset_top = 37.0
+offset_right = 132.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0.95686275, 0.99215686, 0.02745098, 1)
+theme_override_fonts/font = ExtResource("7_o6xl0")
+theme_override_font_sizes/font_size = 24
+text = "READY!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Blinking" type="Node2D" parent="."]
 script = ExtResource("3_tefeu")
 

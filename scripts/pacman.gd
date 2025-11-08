@@ -31,15 +31,22 @@ var second_fruit_spawned: bool = false
 
 @onready var scoreUI: Label = $"../1UP"
 @onready var highScoreUI: Label = $"../HighScore"
+@onready var playerOneUI: Label = $"../PlayerOne"
+@onready var readyUI: Label = $"../Ready"
 
 @onready var startupSound: AudioStreamPlayer = $"../Startup Sound"
 
 func _ready() -> void:
 	if not Globals.startup_played:
 		can_move = false
+		readyUI.visible = true
 		startupSound.play()
 		startupSound.finished.connect(_on_startup_finished)
 		Globals.startup_played = true
+
+	playerOneUI.visible = true
+	await get_tree().create_timer(2.5).timeout
+	playerOneUI.visible = false
 
 	shape_query.shape = collision_shape_2d.shape
 	shape_query.collision_mask = 2
@@ -184,3 +191,4 @@ func _get_fruit_scene_for_level(level: int) -> PackedScene:
 
 func _on_startup_finished() -> void:
 	can_move = true
+	readyUI.visible = false
