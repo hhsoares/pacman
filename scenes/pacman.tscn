@@ -27,6 +27,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_ceynl")
+}],
+"loop": true,
+"name": &"start",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_kcrxf")
 }],
 "loop": true,
@@ -43,7 +51,7 @@ script = ExtResource("1_kjyp3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(-1, -1)
 sprite_frames = SubResource("SpriteFrames_rx8a7")
-animation = &"stop"
+animation = &"start"
 speed_scale = 2.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

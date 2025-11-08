@@ -8,6 +8,8 @@ var shape_query = PhysicsShapeQueryParameters2D.new()
 
 @export var speed := 300
 
+var can_move: bool = true
+
 @onready var direction_pointer = $DirectionPointer
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var _animated_sprite = $AnimatedSprite2D
@@ -34,7 +36,9 @@ var second_fruit_spawned: bool = false
 
 func _ready() -> void:
 	if not Globals.startup_played:
+		can_move = false
 		startupSound.play()
+		startupSound.finished.connect(_on_startup_finished)
 		Globals.startup_played = true
 
 	shape_query.shape = collision_shape_2d.shape
@@ -48,6 +52,10 @@ func _ready() -> void:
 	highScoreUI.text = str(Globals.high_score).pad_zeros(6)
 
 func _physics_process(delta: float) -> void:
+	if not can_move:
+		velocity = Vector2.ZERO
+		_animated_sprite.play("start")
+		return
 	get_input()
 
 	if movement_direction == Vector2.ZERO:
@@ -173,3 +181,6 @@ func _get_fruit_scene_for_level(level: int) -> PackedScene:
 		_:
 			print("Level", level, "fruit: Key")
 			return key_scene
+
+func _on_startup_finished() -> void:
+	can_move = true
