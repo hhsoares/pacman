@@ -6,13 +6,14 @@ var next_movement_direction = Vector2.ZERO
 var movement_direction = Vector2.ZERO
 var shape_query = PhysicsShapeQueryParameters2D.new()
 
-@export var speed := 300
+@export var speed := 400 #change back to 300 later
 
 var can_move: bool = true
 
 @onready var direction_pointer = $DirectionPointer
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var maze: TileMapLayer = $"../Maze"
 @onready var pellets: TileMapLayer = $"../Pellets"
 @onready var fruit_spawn_point: Node2D = $"../Fruit Spawn Point"
 
@@ -156,8 +157,9 @@ func check_pellet() -> void:
 	if pellets.get_used_cells().is_empty():
 		can_move = false
 		_animated_sprite.play("start")
-		await get_tree().create_timer(3.0).timeout
-		
+		await get_tree().create_timer(2.0).timeout
+		await _blink_maze(4, 0.15)
+
 		print("All pellets collected — advancing to next level")
 		Globals.level += 1
 		get_tree().reload_current_scene()
@@ -210,3 +212,12 @@ func _get_fruit_scene_for_level(level: int) -> PackedScene:
 func _on_startup_finished() -> void:
 	can_move = true
 	readyUI.visible = false
+
+func _blink_maze(times: int = 4, interval: float = 0.15) -> void:
+	var mat := maze.material
+	if mat and mat is ShaderMaterial:
+		for i in range(times):
+			mat.set_shader_parameter("flash", 1.0)
+			await get_tree().create_timer(interval).timeout
+			mat.set_shader_parameter("flash", 0.0)
+			await get_tree().create_timer(interval).timeout
