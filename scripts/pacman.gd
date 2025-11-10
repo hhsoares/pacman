@@ -9,6 +9,7 @@ var shape_query = PhysicsShapeQueryParameters2D.new()
 @export var speed := 400 #change back to 300 later
 
 var can_move: bool = true
+@onready var is_dying: bool = false
 
 @onready var direction_pointer = $DirectionPointer
 @onready var collision_shape_2d = $CollisionShape2D
@@ -45,9 +46,10 @@ var current_fruit: Node2D = null
 @onready var startupSound: AudioStreamPlayer = $"../Startup Sound"
 
 func _ready() -> void:
+	print(Globals.respawned)
 	can_move = false
 
-	for  ghost in [blinky, pinky, inky, clyde]:
+	for ghost in [blinky, pinky, inky, clyde]:
 		ghost.visible = false
 	if Globals.level == 1:
 		pacman.visible = false
@@ -67,7 +69,7 @@ func _ready() -> void:
 		ghost.visible = true
 	pacman.visible = true
 
-	if Globals.level > 1:
+	if Globals.level > 1 or Globals.respawned == true:
 		can_move = true
 		readyUI.visible = false
 
@@ -82,10 +84,15 @@ func _ready() -> void:
 	highScoreUI.text = str(Globals.high_score).pad_zeros(6)
 
 func _physics_process(delta: float) -> void:
+	if is_dying:
+		velocity = Vector2.ZERO
+		return
+
 	if not can_move:
 		velocity = Vector2.ZERO
 		_animated_sprite.play("start")
 		return
+
 	get_input()
 
 	if movement_direction == Vector2.ZERO:
@@ -242,12 +249,27 @@ func _blink_maze(times: int = 4, interval: float = 0.15) -> void:
 			await get_tree().create_timer(interval).timeout
 
 func _check_ghost_collision() -> void:
+	if is_dying:
+		return
+
 	for i in range(get_slide_collision_count()):
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
 		if collider and collider.is_in_group("ghost"):
 			_on_ghost_collision(collider)
+			break
 
 func _on_ghost_collision(ghost: Node) -> void:
+	if is_dying:
+		return
+
+	is_dying = true
 	print("Pacman hit ghost: ", ghost.name)
+	velocity = Vector2.ZERO
+	_animated_sprite.play("stop")
+	await get_tree().create_timer(1.5).timeout
+	rotation_degrees = 0
+	_animated_sprite.play("death")
+	await _animated_sprite.animation_finished
 	get_tree().reload_current_scene()
+	Globals.respawned = true

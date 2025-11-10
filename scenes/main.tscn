@@ -379,19 +379,19 @@ collision_layer = 17
 collision_mask = 16
 
 [node name="Pinky" parent="." groups=["ghost"] instance=ExtResource("16_yc10j")]
-position = Vector2(137, -7)
+position = Vector2(-3.8146973e-06, -11)
 scale = Vector2(3.18, 3.18)
 collision_layer = 17
 collision_mask = 16
 
 [node name="Clyde" parent="." groups=["ghost"] instance=ExtResource("17_jscy8")]
-position = Vector2(183, 131)
+position = Vector2(46.999996, -11)
 scale = Vector2(3.18, 3.18)
 collision_layer = 17
 collision_mask = 16
 
 [node name="Inky" parent="." groups=["ghost"] instance=ExtResource("18_pm3ni")]
-position = Vector2(-141, -9)
+position = Vector2(-47, -11)
 scale = Vector2(3.18, 3.18)
 collision_layer = 17
 collision_mask = 16

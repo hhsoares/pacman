@@ -5,3 +5,5 @@ var high_score: int = 0
 var level: int = 1
 
 var startup_played: bool = false
+
+var respawned: bool = false
