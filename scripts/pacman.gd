@@ -29,6 +29,11 @@ var pellets_eaten: int = 0
 var first_fruit_spawned: bool = false
 var second_fruit_spawned: bool = false
 
+@onready var blinky: CharacterBody2D = $"../Blinky"
+@onready var pinky: CharacterBody2D = $"../Pinky"
+@onready var inky: CharacterBody2D = $"../Inky"
+@onready var clyde: CharacterBody2D = $"../Clyde"
+
 @onready var scoreUI: Label = $"../1UP"
 @onready var highScoreUI: Label = $"../HighScore"
 @onready var playerOneUI: Label = $"../PlayerOne"
@@ -37,6 +42,9 @@ var second_fruit_spawned: bool = false
 @onready var startupSound: AudioStreamPlayer = $"../Startup Sound"
 
 func _ready() -> void:
+	for  ghost in [blinky, pinky, inky, clyde]:
+		ghost.visible = false
+
 	if not Globals.startup_played:
 		can_move = false
 		readyUI.visible = true
@@ -47,6 +55,9 @@ func _ready() -> void:
 	playerOneUI.visible = true
 	await get_tree().create_timer(2.5).timeout
 	playerOneUI.visible = false
+
+	for  ghost in [blinky, pinky, inky, clyde]:
+		ghost.visible = true
 
 	shape_query.shape = collision_shape_2d.shape
 	shape_query.collision_mask = 2
