@@ -44,24 +44,31 @@ var second_fruit_spawned: bool = false
 @onready var startupSound: AudioStreamPlayer = $"../Startup Sound"
 
 func _ready() -> void:
+	can_move = false
+
 	for  ghost in [blinky, pinky, inky, clyde]:
 		ghost.visible = false
-	pacman.visible = false
+	if Globals.level == 1:
+		pacman.visible = false
 
 	if not Globals.startup_played:
-		can_move = false
-		readyUI.visible = true
 		startupSound.play()
 		startupSound.finished.connect(_on_startup_finished)
 		Globals.startup_played = true
 
-	playerOneUI.visible = true
+	playerOneUI.visible = false
+	if Globals.level == 1:
+		playerOneUI.visible = true
 	await get_tree().create_timer(2.5).timeout
 	playerOneUI.visible = false
 
 	for  ghost in [blinky, pinky, inky, clyde]:
 		ghost.visible = true
 	pacman.visible = true
+
+	if Globals.level > 1:
+		can_move = true
+		readyUI.visible = false
 
 	shape_query.shape = collision_shape_2d.shape
 	shape_query.collision_mask = 2
