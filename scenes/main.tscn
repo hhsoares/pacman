@@ -361,7 +361,8 @@ position = Vector2(0, 61)
 [node name="Pac-Man" parent="." instance=ExtResource("2_0wfyh")]
 position = Vector2(-4, 204)
 scale = Vector2(3.42, 3.42)
-collision_mask = 14
+collision_layer = 17
+collision_mask = 30
 cherries_scene = ExtResource("8_tipki")
 strawberry_scene = ExtResource("9_jkv2x")
 peach_scene = ExtResource("10_jbj1t")
@@ -371,21 +372,29 @@ galaxian_scene = ExtResource("13_0ld40")
 bell_scene = ExtResource("14_gqmmt")
 key_scene = ExtResource("15_yc10j")
 
-[node name="Blinky" parent="." instance=ExtResource("15_gqmmt")]
+[node name="Blinky" parent="." groups=["ghost"] instance=ExtResource("15_gqmmt")]
 position = Vector2(0, -83)
 scale = Vector2(3.18, 3.18)
+collision_layer = 17
+collision_mask = 16
 
-[node name="Pinky" parent="." instance=ExtResource("16_yc10j")]
-position = Vector2(-3.8146973e-06, -11)
+[node name="Pinky" parent="." groups=["ghost"] instance=ExtResource("16_yc10j")]
+position = Vector2(137, -7)
 scale = Vector2(3.18, 3.18)
+collision_layer = 17
+collision_mask = 16
 
-[node name="Clyde" parent="." instance=ExtResource("17_jscy8")]
-position = Vector2(46.999996, -11)
+[node name="Clyde" parent="." groups=["ghost"] instance=ExtResource("17_jscy8")]
+position = Vector2(183, 131)
 scale = Vector2(3.18, 3.18)
+collision_layer = 17
+collision_mask = 16
 
-[node name="Inky" parent="." instance=ExtResource("18_pm3ni")]
-position = Vector2(-47, -11)
+[node name="Inky" parent="." groups=["ghost"] instance=ExtResource("18_pm3ni")]
+position = Vector2(-141, -9)
 scale = Vector2(3.18, 3.18)
+collision_layer = 17
+collision_mask = 16
 
 [node name="Connector" parent="." instance=ExtResource("5_tbgi4")]
 position = Vector2(-1, 0)

@@ -101,6 +101,7 @@ func _physics_process(delta: float) -> void:
 		_animated_sprite.play("moving")
 
 	move_and_slide()
+	_check_ghost_collision()
 	check_pellet()
 
 func get_input() -> void:
@@ -239,3 +240,14 @@ func _blink_maze(times: int = 4, interval: float = 0.15) -> void:
 			await get_tree().create_timer(interval).timeout
 			mat.set_shader_parameter("flash", 0.0)
 			await get_tree().create_timer(interval).timeout
+
+func _check_ghost_collision() -> void:
+	for i in range(get_slide_collision_count()):
+		var collision := get_slide_collision(i)
+		var collider := collision.get_collider()
+		if collider and collider.is_in_group("ghost"):
+			_on_ghost_collision(collider)
+
+func _on_ghost_collision(ghost: Node) -> void:
+	print("Pacman hit ghost: ", ghost.name)
+	get_tree().reload_current_scene()
