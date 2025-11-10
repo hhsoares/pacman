@@ -29,6 +29,7 @@ var pellets_eaten: int = 0
 var first_fruit_spawned: bool = false
 var second_fruit_spawned: bool = false
 
+@onready var pacman: CharacterBody2D = $"."
 @onready var blinky: CharacterBody2D = $"../Blinky"
 @onready var pinky: CharacterBody2D = $"../Pinky"
 @onready var inky: CharacterBody2D = $"../Inky"
@@ -44,6 +45,7 @@ var second_fruit_spawned: bool = false
 func _ready() -> void:
 	for  ghost in [blinky, pinky, inky, clyde]:
 		ghost.visible = false
+	pacman.visible = false
 
 	if not Globals.startup_played:
 		can_move = false
@@ -58,6 +60,7 @@ func _ready() -> void:
 
 	for  ghost in [blinky, pinky, inky, clyde]:
 		ghost.visible = true
+	pacman.visible = true
 
 	shape_query.shape = collision_shape_2d.shape
 	shape_query.collision_mask = 2
