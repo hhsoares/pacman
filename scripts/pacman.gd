@@ -154,6 +154,10 @@ func check_pellet() -> void:
 	_check_fruit_spawn()
 
 	if pellets.get_used_cells().is_empty():
+		can_move = false
+		_animated_sprite.play("start")
+		await get_tree().create_timer(3.0).timeout
+		
 		print("All pellets collected — advancing to next level")
 		Globals.level += 1
 		get_tree().reload_current_scene()
