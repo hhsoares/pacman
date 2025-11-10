@@ -29,6 +29,7 @@ var can_move: bool = true
 var pellets_eaten: int = 0
 var first_fruit_spawned: bool = false
 var second_fruit_spawned: bool = false
+var current_fruit: Node2D = null
 
 @onready var pacman: CharacterBody2D = $"."
 @onready var blinky: CharacterBody2D = $"../Blinky"
@@ -62,7 +63,7 @@ func _ready() -> void:
 	await get_tree().create_timer(2.5).timeout
 	playerOneUI.visible = false
 
-	for  ghost in [blinky, pinky, inky, clyde]:
+	for ghost in [blinky, pinky, inky, clyde]:
 		ghost.visible = true
 	pacman.visible = true
 
@@ -162,9 +163,13 @@ func check_pellet() -> void:
 	_check_fruit_spawn()
 
 	if pellets.get_used_cells().is_empty():
+		if is_instance_valid(current_fruit):
+			current_fruit.queue_free()
 		can_move = false
 		_animated_sprite.play("start")
 		await get_tree().create_timer(2.0).timeout
+		for ghost in [blinky, pinky, inky, clyde]:
+			ghost.visible = false
 		await _blink_maze(4, 0.15)
 
 		print("All pellets collected — advancing to next level")
@@ -184,9 +189,15 @@ func _check_fruit_spawn() -> void:
 func _spawn_fruit() -> void:
 	var scene := _get_fruit_scene_for_level(Globals.level)
 
+	if is_instance_valid(current_fruit):
+		current_fruit.queue_free()
+
 	var fruit := scene.instantiate()
 	fruit.global_position = fruit_spawn_point.global_position
 	get_tree().current_scene.add_child(fruit)
+
+	current_fruit = fruit
+
 	print("Spawned fruit for level", Globals.level, "at", fruit.global_position)
 
 func _get_fruit_scene_for_level(level: int) -> PackedScene:
