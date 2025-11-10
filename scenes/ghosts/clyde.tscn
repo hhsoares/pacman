@@ -1,0 +1,94 @@
+[gd_scene load_steps=12 format=3 uid="uid://ximx4bl1q54o"]
+
+[ext_resource type="Texture2D" uid="uid://c6gf8ly7ktugk" path="res://assets/ghosts/clyde.png" id="1_kr3d0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32ghc"]
+atlas = ExtResource("1_kr3d0")
+region = Rect2(96, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pd6n"]
+atlas = ExtResource("1_kr3d0")
+region = Rect2(112, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nhp0"]
+atlas = ExtResource("1_kr3d0")
+region = Rect2(32, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3rtr"]
+atlas = ExtResource("1_kr3d0")
+region = Rect2(48, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awmnt"]
+atlas = ExtResource("1_kr3d0")
+region = Rect2(0, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_woppv"]
+atlas = ExtResource("1_kr3d0")
+region = Rect2(16, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvof3"]
+atlas = ExtResource("1_kr3d0")
+region = Rect2(64, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpn6r"]
+atlas = ExtResource("1_kr3d0")
+region = Rect2(80, 0, 14, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2s471"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32ghc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pd6n")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nhp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3rtr")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awmnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_woppv")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvof3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpn6r")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f57jd"]
+size = Vector2(14, 14)
+
+[node name="Clyde" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2s471")
+animation = &"up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f57jd")

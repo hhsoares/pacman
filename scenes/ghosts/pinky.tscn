@@ -1,0 +1,94 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxh32pomdnac7"]
+
+[ext_resource type="Texture2D" uid="uid://c4hdr0qmbin2b" path="res://assets/ghosts/pinky.png" id="1_7esn6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6kof"]
+atlas = ExtResource("1_7esn6")
+region = Rect2(96, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06ifc"]
+atlas = ExtResource("1_7esn6")
+region = Rect2(112, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uwyp"]
+atlas = ExtResource("1_7esn6")
+region = Rect2(32, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ix0i"]
+atlas = ExtResource("1_7esn6")
+region = Rect2(48, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwbs3"]
+atlas = ExtResource("1_7esn6")
+region = Rect2(0, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdrqj"]
+atlas = ExtResource("1_7esn6")
+region = Rect2(16, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptpwf"]
+atlas = ExtResource("1_7esn6")
+region = Rect2(64, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tlu4"]
+atlas = ExtResource("1_7esn6")
+region = Rect2(80, 0, 14, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2s471"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6kof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06ifc")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uwyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ix0i")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwbs3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdrqj")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptpwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tlu4")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f57jd"]
+size = Vector2(14, 14)
+
+[node name="Pinky" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2s471")
+animation = &"down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f57jd")

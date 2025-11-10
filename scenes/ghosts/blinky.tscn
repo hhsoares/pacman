@@ -1,3 +1,94 @@
-[gd_scene format=3 uid="uid://cdwba6wkotyrw"]
+[gd_scene load_steps=12 format=3 uid="uid://cdwba6wkotyrw"]
+
+[ext_resource type="Texture2D" uid="uid://buhk6nqtog6ih" path="res://assets/ghosts/blinky.png" id="1_8lv0q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bk2d"]
+atlas = ExtResource("1_8lv0q")
+region = Rect2(96, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcaqm"]
+atlas = ExtResource("1_8lv0q")
+region = Rect2(112, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl5t1"]
+atlas = ExtResource("1_8lv0q")
+region = Rect2(32, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vddnc"]
+atlas = ExtResource("1_8lv0q")
+region = Rect2(48, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0emu"]
+atlas = ExtResource("1_8lv0q")
+region = Rect2(0, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dip1j"]
+atlas = ExtResource("1_8lv0q")
+region = Rect2(16, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b3gj"]
+atlas = ExtResource("1_8lv0q")
+region = Rect2(64, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iopke"]
+atlas = ExtResource("1_8lv0q")
+region = Rect2(80, 0, 14, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2s471"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bk2d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcaqm")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl5t1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vddnc")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0emu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dip1j")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b3gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iopke")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f57jd"]
+size = Vector2(14, 14)
 
 [node name="Blinky" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2s471")
+animation = &"left"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f57jd")

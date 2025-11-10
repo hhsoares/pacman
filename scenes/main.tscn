@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://d0te4yyd7y1hg"]
+[gd_scene load_steps=40 format=4 uid="uid://d0te4yyd7y1hg"]
 
 [ext_resource type="Texture2D" uid="uid://byxjh4tv4gp1x" path="res://assets/maze/Wall_Atlas.png" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c24y5jtiq6cw7" path="res://scenes/pacman.tscn" id="2_0wfyh"]
@@ -14,8 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://b8qhrmaf62gg5" path="res://scenes/fruits/grape.tscn" id="12_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://br1eyb3x23sdf" path="res://scenes/fruits/galaxian_starship.tscn" id="13_0ld40"]
 [ext_resource type="PackedScene" uid="uid://bwfgvwr1n1qln" path="res://scenes/fruits/bell.tscn" id="14_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://cdwba6wkotyrw" path="res://scenes/ghosts/blinky.tscn" id="15_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://cw08dvpmi107v" path="res://scenes/fruits/key.tscn" id="15_yc10j"]
 [ext_resource type="AudioStream" uid="uid://dnw1biwxcw5x5" path="res://assets/sounds/pacman_beginning.wav" id="16_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://cxh32pomdnac7" path="res://scenes/ghosts/pinky.tscn" id="16_yc10j"]
+[ext_resource type="PackedScene" uid="uid://ximx4bl1q54o" path="res://scenes/ghosts/clyde.tscn" id="17_jscy8"]
+[ext_resource type="PackedScene" uid="uid://20r5r43liib7" path="res://scenes/ghosts/inky.tscn" id="18_pm3ni"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_choun"]
 vertices = PackedVector2Array(1.5, -1.5, 12, -1.5, 12, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -12, 1.5, -12)
@@ -349,7 +353,7 @@ texture = ExtResource("3_tbgi4")
 position = Vector2(0, 61)
 
 [node name="Pac-Man" parent="." instance=ExtResource("2_0wfyh")]
-position = Vector2(-4, 201.99998)
+position = Vector2(-4, 204)
 scale = Vector2(3.42, 3.42)
 collision_mask = 14
 cherries_scene = ExtResource("8_tipki")
@@ -360,6 +364,22 @@ grapes_scene = ExtResource("12_dp3eg")
 galaxian_scene = ExtResource("13_0ld40")
 bell_scene = ExtResource("14_gqmmt")
 key_scene = ExtResource("15_yc10j")
+
+[node name="Blinky" parent="." instance=ExtResource("15_gqmmt")]
+position = Vector2(0, -83)
+scale = Vector2(3.18, 3.18)
+
+[node name="Pinky" parent="." instance=ExtResource("16_yc10j")]
+position = Vector2(-3.8146973e-06, -11)
+scale = Vector2(3.18, 3.18)
+
+[node name="Clyde" parent="." instance=ExtResource("17_jscy8")]
+position = Vector2(46.999996, -11)
+scale = Vector2(3.18, 3.18)
+
+[node name="Inky" parent="." instance=ExtResource("18_pm3ni")]
+position = Vector2(-47, -11)
+scale = Vector2(3.18, 3.18)
 
 [node name="Connector" parent="." instance=ExtResource("5_tbgi4")]
 position = Vector2(-1, 0)
