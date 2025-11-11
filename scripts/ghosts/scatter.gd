@@ -4,10 +4,19 @@ extends State
 @onready var maze: TileMapLayer = $"../../../Maze"
 
 const TILE_SIZE := 24.0
-const BLINKY_TARGET_TILE := Vector2i(12, -14)
+const BLINKY_TARGET_TILE := Vector2i(11, -18)
 
 var _last_cell: Vector2i
 var _has_last_cell: bool = false
+
+var _scatter_time: float = 0.0
+var _scatter_timer_started: bool = false
+
+
+func _ready() -> void:
+	# start scatter timer
+	_scatter_time = 0.0
+	_scatter_timer_started = true
 
 
 func physics_update(delta: float) -> void:
@@ -15,6 +24,14 @@ func physics_update(delta: float) -> void:
 		return
 
 	if ghost is Blinky:
+		# timer logic
+		if _scatter_timer_started and is_instance_valid(state_machine):
+			_scatter_time += delta
+			if _scatter_time >= 7.0:
+				print("Blinky Scatter -> Chase")
+				state_machine.change_state("chase")
+				return
+
 		var current_cell := _get_current_cell()
 
 		if not _has_last_cell:
@@ -33,7 +50,6 @@ func physics_update(delta: float) -> void:
 			" | Dir:", ghost.direction,
 			" | Target:", BLINKY_TARGET_TILE)
 
-		# if we somehow got ZERO, don't move this frame
 		if ghost.direction == Vector2.ZERO:
 			ghost.velocity = Vector2.ZERO
 			return
@@ -106,7 +122,6 @@ func _choose_dir_to_target(current_cell: Vector2i, target_cell: Vector2i) -> Vec
 
 	print("  => NO non-reverse walkable neighbor found")
 
-	# sanity debug of reverse cell
 	var back_cell := current_cell + Vector2i(int(opposite.x), int(opposite.y))
 	var back_walkable := _is_walkable(back_cell)
 	print("  Reverse cell:", back_cell, " walkable:", back_walkable)
@@ -123,7 +138,7 @@ func _is_walkable(cell: Vector2i) -> bool:
 	var source_id := maze.get_cell_source_id(cell)
 	var data := maze.get_cell_tile_data(cell)
 
-	var path_flag: Variant = null  # explicitly typed, avoids inference error
+	var path_flag: Variant = null
 	if data != null:
 		path_flag = data.get_custom_data("path")
 
