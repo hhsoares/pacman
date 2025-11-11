@@ -7,3 +7,5 @@ var level: int = 1
 var startup_played: bool = false
 
 var respawned: bool = false
+
+var lives: int = 1

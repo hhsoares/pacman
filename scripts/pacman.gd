@@ -42,12 +42,14 @@ var current_fruit: Node2D = null
 @onready var highScoreUI: Label = $"../HighScore"
 @onready var playerOneUI: Label = $"../PlayerOne"
 @onready var readyUI: Label = $"../Ready"
+@onready var gameOverUI: Label = $"../Game Over"
 
 @onready var startupSound: AudioStreamPlayer = $"../Startup Sound"
 
 func _ready() -> void:
 	print(Globals.respawned)
 	can_move = false
+	gameOverUI.visible = false
 
 	for ghost in [blinky, pinky, inky, clyde]:
 		ghost.visible = false
@@ -59,7 +61,6 @@ func _ready() -> void:
 		startupSound.finished.connect(_on_startup_finished)
 		Globals.startup_played = true
 
-	playerOneUI.visible = false
 	if Globals.level == 1:
 		playerOneUI.visible = true
 	await get_tree().create_timer(2.5).timeout
@@ -106,6 +107,11 @@ func _physics_process(delta: float) -> void:
 		_animated_sprite.play("stop")
 	else:
 		_animated_sprite.play("moving")
+
+	if Globals.lives <= 0:
+		gameOverUI.visible = true
+	else:
+		gameOverUI.visible = false
 
 	move_and_slide()
 	_check_ghost_collision()
@@ -271,5 +277,6 @@ func _on_ghost_collision(ghost: Node) -> void:
 	rotation_degrees = 0
 	_animated_sprite.play("death")
 	await _animated_sprite.animation_finished
+	Globals.lives -= 1
 	get_tree().reload_current_scene()
 	Globals.respawned = true
