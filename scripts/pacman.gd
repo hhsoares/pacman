@@ -48,6 +48,7 @@ var current_fruit: Node2D = null
 
 func _ready() -> void:
 	print(Globals.respawned)
+	Globals.ghosts_can_move = false
 	can_move = false
 	gameOverUI.visible = false
 
@@ -72,6 +73,7 @@ func _ready() -> void:
 
 	if Globals.level > 1 or Globals.respawned == true:
 		can_move = true
+		Globals.ghosts_can_move = true
 		readyUI.visible = false
 
 	shape_query.shape = collision_shape_2d.shape
@@ -243,6 +245,7 @@ func _get_fruit_scene_for_level(level: int) -> PackedScene:
 
 func _on_startup_finished() -> void:
 	can_move = true
+	Globals.ghosts_can_move = true
 	readyUI.visible = false
 
 func _blink_maze(times: int = 4, interval: float = 0.15) -> void:
