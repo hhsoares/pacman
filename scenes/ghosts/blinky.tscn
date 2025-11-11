@@ -1,6 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdwba6wkotyrw"]
+[gd_scene load_steps=16 format=3 uid="uid://cdwba6wkotyrw"]
 
 [ext_resource type="Texture2D" uid="uid://buhk6nqtog6ih" path="res://assets/ghosts/blinky.png" id="1_8lv0q"]
+[ext_resource type="Script" uid="uid://djg42fo23dw4y" path="res://scripts/ghosts/blinky.gd" id="1_gl5t1"]
+[ext_resource type="Script" uid="uid://co8rr100tb1np" path="res://scripts/ghosts/state_machine/state_machine.gd" id="2_gcaqm"]
+[ext_resource type="Script" uid="uid://dde3tf67ywjnf" path="res://scripts/ghosts/state_machine/start.gd" id="3_gl5t1"]
+[ext_resource type="Script" uid="uid://brl68cnflgown" path="res://scripts/ghosts/scatter.gd" id="5_vddnc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bk2d"]
 atlas = ExtResource("1_8lv0q")
@@ -85,6 +89,7 @@ animations = [{
 size = Vector2(14, 14)
 
 [node name="Blinky" type="CharacterBody2D"]
+script = ExtResource("1_gl5t1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2s471")
@@ -92,3 +97,13 @@ animation = &"left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f57jd")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_gcaqm")
+initial_state = NodePath("Start")
+
+[node name="Start" type="Node" parent="StateMachine"]
+script = ExtResource("3_gl5t1")
+
+[node name="Scatter" type="Node" parent="StateMachine"]
+script = ExtResource("5_vddnc")

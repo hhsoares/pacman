@@ -1,6 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxh32pomdnac7"]
+[gd_scene load_steps=15 format=3 uid="uid://cxh32pomdnac7"]
 
+[ext_resource type="Script" uid="uid://dk1l6mkemcal" path="res://scripts/ghosts/pinky.gd" id="1_3uwyp"]
 [ext_resource type="Texture2D" uid="uid://c4hdr0qmbin2b" path="res://assets/ghosts/pinky.png" id="1_7esn6"]
+[ext_resource type="Script" uid="uid://co8rr100tb1np" path="res://scripts/ghosts/state_machine/state_machine.gd" id="2_06ifc"]
+[ext_resource type="Script" uid="uid://dde3tf67ywjnf" path="res://scripts/ghosts/state_machine/start.gd" id="3_3uwyp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6kof"]
 atlas = ExtResource("1_7esn6")
@@ -85,6 +88,7 @@ animations = [{
 size = Vector2(14, 14)
 
 [node name="Pinky" type="CharacterBody2D"]
+script = ExtResource("1_3uwyp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2s471")
@@ -92,3 +96,10 @@ animation = &"down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f57jd")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_06ifc")
+initial_state = NodePath("Start")
+
+[node name="Start" type="Node" parent="StateMachine"]
+script = ExtResource("3_3uwyp")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://ximx4bl1q54o"]
+[gd_scene load_steps=14 format=3 uid="uid://ximx4bl1q54o"]
 
 [ext_resource type="Texture2D" uid="uid://c6gf8ly7ktugk" path="res://assets/ghosts/clyde.png" id="1_kr3d0"]
+[ext_resource type="Script" uid="uid://co8rr100tb1np" path="res://scripts/ghosts/state_machine/state_machine.gd" id="2_3pd6n"]
+[ext_resource type="Script" uid="uid://dde3tf67ywjnf" path="res://scripts/ghosts/state_machine/start.gd" id="3_3nhp0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_32ghc"]
 atlas = ExtResource("1_kr3d0")
@@ -92,3 +94,9 @@ animation = &"up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f57jd")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_3pd6n")
+
+[node name="Start" type="Node" parent="StateMachine"]
+script = ExtResource("3_3nhp0")
