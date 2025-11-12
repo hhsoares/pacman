@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://20r5r43liib7"]
+[gd_scene load_steps=18 format=3 uid="uid://20r5r43liib7"]
 
 [ext_resource type="Script" uid="uid://hft0o6u3tqdl" path="res://scripts/ghosts/inky.gd" id="1_6src2"]
 [ext_resource type="Texture2D" uid="uid://cfn1flpeqe6un" path="res://assets/ghosts/inky.png" id="1_r1m7r"]
 [ext_resource type="Script" uid="uid://co8rr100tb1np" path="res://scripts/ghosts/state_machine/state_machine.gd" id="2_0hbvw"]
 [ext_resource type="Script" uid="uid://dde3tf67ywjnf" path="res://scripts/ghosts/start.gd" id="3_6src2"]
 [ext_resource type="Script" uid="uid://d142jxnn0eqlq" path="res://scripts/ghosts/spawn.gd" id="5_2vl8y"]
+[ext_resource type="Script" uid="uid://brl68cnflgown" path="res://scripts/ghosts/scatter.gd" id="5_ggk0d"]
+[ext_resource type="Script" uid="uid://c06wieabqbued" path="res://scripts/ghosts/chase.gd" id="6_mgkpl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_veiyb"]
 atlas = ExtResource("1_r1m7r")
@@ -98,15 +100,18 @@ animation = &"up"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f57jd")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_0hbvw")
+initial_state = NodePath("Start")
 
 [node name="Start" type="Node" parent="StateMachine"]
 script = ExtResource("3_6src2")
 
 [node name="Scatter" type="Node" parent="StateMachine"]
+script = ExtResource("5_ggk0d")
 
 [node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("6_mgkpl")
 
 [node name="Spawn" type="Node" parent="StateMachine"]
 script = ExtResource("5_2vl8y")
