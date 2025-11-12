@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://ximx4bl1q54o"]
+[gd_scene load_steps=15 format=3 uid="uid://ximx4bl1q54o"]
 
+[ext_resource type="Script" uid="uid://tha4xgq1ynga" path="res://scripts/ghosts/clyde.gd" id="1_3nhp0"]
 [ext_resource type="Texture2D" uid="uid://c6gf8ly7ktugk" path="res://assets/ghosts/clyde.png" id="1_kr3d0"]
 [ext_resource type="Script" uid="uid://co8rr100tb1np" path="res://scripts/ghosts/state_machine/state_machine.gd" id="2_3pd6n"]
 [ext_resource type="Script" uid="uid://dde3tf67ywjnf" path="res://scripts/ghosts/start.gd" id="3_3nhp0"]
@@ -87,6 +88,7 @@ animations = [{
 size = Vector2(14, 14)
 
 [node name="Clyde" type="CharacterBody2D"]
+script = ExtResource("1_3nhp0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2s471")

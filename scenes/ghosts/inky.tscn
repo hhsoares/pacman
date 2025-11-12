@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://20r5r43liib7"]
+[gd_scene load_steps=15 format=3 uid="uid://20r5r43liib7"]
 
+[ext_resource type="Script" uid="uid://hft0o6u3tqdl" path="res://scripts/ghosts/inky.gd" id="1_6src2"]
 [ext_resource type="Texture2D" uid="uid://cfn1flpeqe6un" path="res://assets/ghosts/inky.png" id="1_r1m7r"]
 [ext_resource type="Script" uid="uid://co8rr100tb1np" path="res://scripts/ghosts/state_machine/state_machine.gd" id="2_0hbvw"]
 [ext_resource type="Script" uid="uid://dde3tf67ywjnf" path="res://scripts/ghosts/start.gd" id="3_6src2"]
@@ -87,6 +88,7 @@ animations = [{
 size = Vector2(14, 14)
 
 [node name="Inky" type="CharacterBody2D"]
+script = ExtResource("1_6src2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2s471")
