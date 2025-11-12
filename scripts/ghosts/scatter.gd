@@ -30,7 +30,6 @@ func physics_update(delta: float) -> void:
 			if _scatter_time >= 7.0:
 				print("Blinky Scatter -> Chase")
 				state_machine.change_state("chase")
-				_scatter_time = 0.0
 				return
 
 		var current_cell := _get_current_cell()
