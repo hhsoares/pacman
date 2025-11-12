@@ -6,6 +6,8 @@ extends State
 const TILE_SIZE := 24.0
 const BLINKY_TARGET_TILE := Vector2i(11, -18)
 const PINKY_TARGET_TILE  := Vector2i(-12, -18)
+const CLYDE_TARGET_TILE  := Vector2i(-14, 16)
+const INKY_TARGET_TILE   := Vector2i(13, 16)
 
 var _last_cell: Vector2i
 var _has_last_cell: bool = false
@@ -28,7 +30,6 @@ func physics_update(delta: float) -> void:
 		_scatter_time += delta
 		if _scatter_time >= 7.0:
 			state_machine.change_state("chase")
-			print("changing to chase")
 			return
 
 	# movement per-ghost
@@ -37,8 +38,12 @@ func physics_update(delta: float) -> void:
 		target_cell = BLINKY_TARGET_TILE
 	elif ghost is Pinky:
 		target_cell = PINKY_TARGET_TILE
+	elif ghost is Inky:
+		target_cell = INKY_TARGET_TILE
+	elif ghost is Clyde:
+		target_cell = CLYDE_TARGET_TILE
 	else:
-		return  # other ghosts handled later
+		return
 
 	var current_cell := _get_current_cell()
 
