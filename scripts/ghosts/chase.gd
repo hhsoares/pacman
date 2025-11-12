@@ -11,6 +11,7 @@ var _has_last_cell: bool = false
 
 var _chase_time: float = 0.0
 var _chase_timer_started: bool = false
+var _last_pac_dir: Vector2 = Vector2.LEFT
 
 
 func _ready() -> void:
@@ -28,8 +29,34 @@ func physics_update(delta: float) -> void:
 		if _chase_time >= 20.0:
 			print("Chase -> Scatter")
 			state_machine.change_state("scatter")
-			_chase_time = 0.0
+			_chase_time = 0
 			return
+
+	if ghost is Pinky:
+		var current_cell := _get_current_cell()
+		var pac_cell := _get_pacman_cell()
+		var pac_dir := _get_pacman_dir()
+
+		var ahead := Vector2i(int(pac_dir.x), int(pac_dir.y)) * 4
+		var left := Vector2i(int(-pac_dir.y), int(pac_dir.x)) * 4
+		var target_cell := pac_cell + ahead + left
+
+		if not _has_last_cell:
+			_last_cell = current_cell
+			_has_last_cell = true
+			ghost.direction = _choose_dir_to_target(current_cell, target_cell)
+		else:
+			if current_cell != _last_cell:
+				ghost.global_position = _get_cell_center(current_cell)
+				_last_cell = current_cell
+				ghost.direction = _choose_dir_to_target(current_cell, target_cell)
+
+		if ghost.direction == Vector2.ZERO:
+			ghost.velocity = Vector2.ZERO
+			return
+
+		ghost.velocity = ghost.direction * ghost.speed
+		ghost.move_and_slide()
 
 	# movement: Blinky logic
 	if ghost is Blinky:
@@ -62,6 +89,13 @@ func _get_current_cell() -> Vector2i:
 func _get_pacman_cell() -> Vector2i:
 	var local_pos: Vector2 = maze.to_local(pacman.global_position)
 	return maze.local_to_map(local_pos)
+
+func _get_pacman_dir() -> Vector2:
+	var dir: Vector2 = pacman.get("movement_direction")
+	if dir == Vector2.ZERO:
+		return _last_pac_dir
+	_last_pac_dir = dir
+	return dir
 
 func _get_cell_center(cell: Vector2i) -> Vector2:
 	var local_center := (Vector2(cell) + Vector2(0.5, 0.5)) * TILE_SIZE

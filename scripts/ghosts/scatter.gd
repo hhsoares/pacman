@@ -28,6 +28,7 @@ func physics_update(delta: float) -> void:
 		_scatter_time += delta
 		if _scatter_time >= 7.0:
 			state_machine.change_state("chase")
+			print("changing to chase")
 			return
 
 	# movement per-ghost

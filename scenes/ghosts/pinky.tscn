@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxh32pomdnac7"]
+[gd_scene load_steps=17 format=3 uid="uid://cxh32pomdnac7"]
 
 [ext_resource type="Script" uid="uid://dk1l6mkemcal" path="res://scripts/ghosts/pinky.gd" id="1_3uwyp"]
 [ext_resource type="Texture2D" uid="uid://c4hdr0qmbin2b" path="res://assets/ghosts/pinky.png" id="1_7esn6"]
 [ext_resource type="Script" uid="uid://co8rr100tb1np" path="res://scripts/ghosts/state_machine/state_machine.gd" id="2_06ifc"]
 [ext_resource type="Script" uid="uid://dde3tf67ywjnf" path="res://scripts/ghosts/start.gd" id="3_3uwyp"]
 [ext_resource type="Script" uid="uid://brl68cnflgown" path="res://scripts/ghosts/scatter.gd" id="5_1ix0i"]
+[ext_resource type="Script" uid="uid://c06wieabqbued" path="res://scripts/ghosts/chase.gd" id="6_vwbs3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g6kof"]
 atlas = ExtResource("1_7esn6")
@@ -107,3 +108,6 @@ script = ExtResource("3_3uwyp")
 
 [node name="Scatter" type="Node" parent="StateMachine"]
 script = ExtResource("5_1ix0i")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("6_vwbs3")
