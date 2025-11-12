@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdwba6wkotyrw"]
+[gd_scene load_steps=18 format=3 uid="uid://cdwba6wkotyrw"]
 
 [ext_resource type="Texture2D" uid="uid://buhk6nqtog6ih" path="res://assets/ghosts/blinky.png" id="1_8lv0q"]
 [ext_resource type="Script" uid="uid://djg42fo23dw4y" path="res://scripts/ghosts/blinky.gd" id="1_gl5t1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dde3tf67ywjnf" path="res://scripts/ghosts/start.gd" id="3_gl5t1"]
 [ext_resource type="Script" uid="uid://brl68cnflgown" path="res://scripts/ghosts/scatter.gd" id="5_vddnc"]
 [ext_resource type="Script" uid="uid://c06wieabqbued" path="res://scripts/ghosts/chase.gd" id="6_d0emu"]
+[ext_resource type="Script" uid="uid://d142jxnn0eqlq" path="res://scripts/ghosts/spawn.gd" id="7_dip1j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bk2d"]
 atlas = ExtResource("1_8lv0q")
@@ -119,3 +120,6 @@ script = ExtResource("5_vddnc")
 
 [node name="Chase" type="Node" parent="StateMachine"]
 script = ExtResource("6_d0emu")
+
+[node name="Spawn" type="Node" parent="StateMachine"]
+script = ExtResource("7_dip1j")
