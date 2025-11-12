@@ -30,6 +30,7 @@ func physics_update(delta: float) -> void:
 			if _scatter_time >= 7.0:
 				print("Blinky Scatter -> Chase")
 				state_machine.change_state("chase")
+				_scatter_time = 0.0
 				return
 
 		var current_cell := _get_current_cell()
@@ -75,7 +76,6 @@ func _get_adjacent_cells(cell: Vector2i) -> Dictionary:
 		"left": cell + Vector2i(-1, 0),
 		"right": cell + Vector2i(1, 0),
 	}
-
 
 func _choose_dir_to_target(current_cell: Vector2i, target_cell: Vector2i) -> Vector2:
 	var best_dir: Vector2 = Vector2.ZERO
