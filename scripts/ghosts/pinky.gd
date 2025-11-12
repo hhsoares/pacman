@@ -4,7 +4,7 @@ class_name Pinky
 @onready var _animated_sprite = $AnimatedSprite2D
 
 @export var speed: float = 100.0
-var direction: Vector2 = Vector2.DOWN
+var direction: Vector2 = Vector2.UP
 
 func _physics_process(delta: float) -> void:
 	if not Globals.ghosts_can_move:

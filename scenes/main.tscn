@@ -390,26 +390,22 @@ key_scene = ExtResource("15_yc10j")
 [node name="Blinky" parent="." groups=["ghost"] instance=ExtResource("15_gqmmt")]
 position = Vector2(0, -83)
 scale = Vector2(3.18, 3.18)
-collision_layer = 17
-collision_mask = 18
+collision_mask = 2
 
 [node name="Pinky" parent="." groups=["ghost"] instance=ExtResource("16_yc10j")]
 position = Vector2(-3.8146973e-06, -11)
 scale = Vector2(3.18, 3.18)
-collision_layer = 17
-collision_mask = 18
+collision_mask = 2
 
 [node name="Clyde" parent="." groups=["ghost"] instance=ExtResource("17_jscy8")]
 position = Vector2(46.999996, -11)
 scale = Vector2(3.18, 3.18)
-collision_layer = 17
-collision_mask = 18
+collision_mask = 2
 
 [node name="Inky" parent="." groups=["ghost"] instance=ExtResource("18_pm3ni")]
 position = Vector2(-47, -11)
 scale = Vector2(3.18, 3.18)
-collision_layer = 17
-collision_mask = 18
+collision_mask = 2
 
 [node name="Connector" parent="." instance=ExtResource("5_tbgi4")]
 position = Vector2(-1, 0)
