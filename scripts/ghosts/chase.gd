@@ -3,6 +3,7 @@ extends State
 @onready var ghost := owner as CharacterBody2D
 @onready var maze: TileMapLayer = $"../../../Maze"
 @onready var pacman: CharacterBody2D = $"../../../Pac-Man"
+@onready var blinky: CharacterBody2D = $"../../../Blinky"
 
 const TILE_SIZE := 24.0
 
@@ -27,19 +28,22 @@ func physics_update(delta: float) -> void:
 	if _chase_timer_started and is_instance_valid(state_machine):
 		_chase_time += delta
 		if _chase_time >= 20.0:
-			print("Chase -> Scatter")
 			state_machine.change_state("scatter")
-			_chase_time = 0
+			_chase_time = 0.0
 			return
 
-	if ghost is Pinky:
+	# INKY: target = reflect Blinky across (Pac + 2 ahead + 2 left)
+	if ghost is Inky:
 		var current_cell := _get_current_cell()
 		var pac_cell := _get_pacman_cell()
-		var pac_dir := _get_pacman_dir()
+		var pac_dir := _get_pacman_dir()  # axis-aligned
 
-		var ahead := Vector2i(int(pac_dir.x), int(pac_dir.y)) * 4
-		var left := Vector2i(int(-pac_dir.y), int(pac_dir.x)) * 4
-		var target_cell := pac_cell + ahead + left
+		var ahead2 := Vector2i(int(pac_dir.x), int(pac_dir.y)) * 2
+		var left2  := Vector2i(int(-pac_dir.y), int(pac_dir.x)) * 2  # rotate 90° CCW
+		var point_p := pac_cell + ahead2 + left2                     # two ahead + two left
+
+		var blinky_cell := _get_cell_from_global(blinky.global_position)
+		var target_cell := point_p * 2 - blinky_cell                  # reflect: T = 2P - B
 
 		if not _has_last_cell:
 			_last_cell = current_cell
@@ -57,22 +61,27 @@ func physics_update(delta: float) -> void:
 
 		ghost.velocity = ghost.direction * ghost.speed
 		ghost.move_and_slide()
+		return
 
-	# movement: Blinky logic
-	if ghost is Blinky:
-		var current_cell := _get_current_cell()
-		var pac_cell := _get_pacman_cell()
+	# keep existing Pinky and Blinky chase behaviors if this file also handles them
+	if ghost is Pinky:
+		var current_cell_p := _get_current_cell()
+		var pac_cell_p := _get_pacman_cell()
+		var pac_dir_p := _get_pacman_dir()
+
+		var ahead4 := Vector2i(int(pac_dir_p.x), int(pac_dir_p.y)) * 4
+		var left4  := Vector2i(int(-pac_dir_p.y), int(pac_dir_p.x)) * 4
+		var target_cell_p := pac_cell_p + ahead4 + left4
 
 		if not _has_last_cell:
-			_last_cell = current_cell
+			_last_cell = current_cell_p
 			_has_last_cell = true
-			ghost.direction = _choose_dir_to_target(current_cell, pac_cell)
+			ghost.direction = _choose_dir_to_target(current_cell_p, target_cell_p)
 		else:
-			if current_cell != _last_cell:
-				# snap to tile center and pick next direction
-				ghost.global_position = _get_cell_center(current_cell)
-				_last_cell = current_cell
-				ghost.direction = _choose_dir_to_target(current_cell, pac_cell)
+			if current_cell_p != _last_cell:
+				ghost.global_position = _get_cell_center(current_cell_p)
+				_last_cell = current_cell_p
+				ghost.direction = _choose_dir_to_target(current_cell_p, target_cell_p)
 
 		if ghost.direction == Vector2.ZERO:
 			ghost.velocity = Vector2.ZERO
@@ -80,15 +89,40 @@ func physics_update(delta: float) -> void:
 
 		ghost.velocity = ghost.direction * ghost.speed
 		ghost.move_and_slide()
+		return
+
+	if ghost is Blinky:
+		var current_cell_b := _get_current_cell()
+		var pac_cell_b := _get_pacman_cell()
+
+		if not _has_last_cell:
+			_last_cell = current_cell_b
+			_has_last_cell = true
+			ghost.direction = _choose_dir_to_target(current_cell_b, pac_cell_b)
+		else:
+			if current_cell_b != _last_cell:
+				ghost.global_position = _get_cell_center(current_cell_b)
+				_last_cell = current_cell_b
+				ghost.direction = _choose_dir_to_target(current_cell_b, pac_cell_b)
+
+		if ghost.direction == Vector2.ZERO:
+			ghost.velocity = Vector2.ZERO
+			return
+
+		ghost.velocity = ghost.direction * ghost.speed
+		ghost.move_and_slide()
+		return
 
 
 func _get_current_cell() -> Vector2i:
-	var local_pos: Vector2 = maze.to_local(ghost.global_position)
+	return _get_cell_from_global(ghost.global_position)
+
+func _get_cell_from_global(gpos: Vector2) -> Vector2i:
+	var local_pos: Vector2 = maze.to_local(gpos)
 	return maze.local_to_map(local_pos)
 
 func _get_pacman_cell() -> Vector2i:
-	var local_pos: Vector2 = maze.to_local(pacman.global_position)
-	return maze.local_to_map(local_pos)
+	return _get_cell_from_global(pacman.global_position)
 
 func _get_pacman_dir() -> Vector2:
 	var dir: Vector2 = pacman.get("movement_direction")
