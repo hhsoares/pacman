@@ -48,6 +48,10 @@ var current_fruit: Node2D = null
 @onready var fruitSound: AudioStreamPlayer = $"../Fruit Sound"
 @onready var ghostSound: AudioStreamPlayer = $"../Ghost Sound"
 @onready var deathSound: AudioStreamPlayer = $"../Death Sound"
+@onready var eatSound: AudioStreamPlayer = $"../Eat Sound"
+
+var _eat_sound_cooldown: float = 0.0
+const EAT_SOUND_INTERVAL := 0.25
 
 func _ready() -> void:
 	print(Globals.respawned)
@@ -90,6 +94,8 @@ func _ready() -> void:
 	highScoreUI.text = str(Globals.high_score).pad_zeros(6)
 
 func _physics_process(delta: float) -> void:
+	_eat_sound_cooldown -= delta
+
 	if is_dying:
 		velocity = Vector2.ZERO
 		return
@@ -172,6 +178,9 @@ func check_pellet() -> void:
 	match pellet_type:
 		"small":
 			update_score(10)
+			_play_eat_sound()
+
+			
 		"big":
 			update_score(50)
 			_frighten_all(6.0)
@@ -320,9 +329,12 @@ func _try_eat_ghost(ghost: Node) -> bool:
 
 	return false
 
-
-
 func _eat_ghost(ghost: Node) -> void:
 	ghostSound.play()
 	update_score(200)
 	ghost.call("eaten")
+
+func _play_eat_sound() -> void:
+	if _eat_sound_cooldown <= 0.0:
+		eatSound.play()
+		_eat_sound_cooldown = EAT_SOUND_INTERVAL
