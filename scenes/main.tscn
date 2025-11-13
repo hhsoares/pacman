@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://d0te4yyd7y1hg"]
+[gd_scene load_steps=49 format=4 uid="uid://d0te4yyd7y1hg"]
 
 [ext_resource type="Texture2D" uid="uid://byxjh4tv4gp1x" path="res://assets/maze/Wall_Atlas.png" id="1_o5qli"]
 [ext_resource type="Shader" uid="uid://xgy4a3v3kwxa" path="res://shaders/maze_flash.gdshader" id="1_yc10j"]
@@ -25,6 +25,9 @@
 [ext_resource type="AudioStream" uid="uid://86y1isqvemn6" path="res://assets/sounds/pacman_eatghost.wav" id="23_og1vs"]
 [ext_resource type="AudioStream" uid="uid://b8uhgtl1mhuao" path="res://assets/sounds/pacman_death.wav" id="24_2wyq8"]
 [ext_resource type="AudioStream" uid="uid://cmvq0elr8hkb8" path="res://assets/sounds/pacman-eat.wav" id="25_og1vs"]
+[ext_resource type="AudioStream" uid="uid://c4hxe7f7xsrgp" path="res://assets/sounds/background-sound.mp3" id="26_vxglm"]
+[ext_resource type="AudioStream" uid="uid://xm4mwfijcacu" path="res://assets/sounds/eaten.mp3" id="27_2f3dj"]
+[ext_resource type="AudioStream" uid="uid://bok44eb0t5xxk" path="res://assets/sounds/power-pellet.mp3" id="28_2f3dj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jscy8"]
 shader = ExtResource("1_yc10j")
@@ -452,6 +455,18 @@ volume_db = -20.0
 
 [node name="Eat Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("25_og1vs")
+volume_db = -10.0
+
+[node name="Background Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_vxglm")
+volume_db = -10.0
+
+[node name="Ghost Eaten Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("27_2f3dj")
+volume_db = -10.0
+
+[node name="Power Pellet Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_2f3dj")
 volume_db = -10.0
 
 [editable path="Blinky"]

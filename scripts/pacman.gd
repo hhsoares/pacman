@@ -49,9 +49,16 @@ var current_fruit: Node2D = null
 @onready var ghostSound: AudioStreamPlayer = $"../Ghost Sound"
 @onready var deathSound: AudioStreamPlayer = $"../Death Sound"
 @onready var eatSound: AudioStreamPlayer = $"../Eat Sound"
+@onready var backgroundSound: AudioStreamPlayer = $"../Background Sound"
+@onready var ghostEatenSound: AudioStreamPlayer = $"../Ghost Eaten Sound"
+@onready var PowerPelletSound: AudioStreamPlayer = $"../Power Pellet Sound"
 
 var _eat_sound_cooldown: float = 0.0
 const EAT_SOUND_INTERVAL := 0.25
+
+var _frightened_audio_active: bool = false
+var _frightened_audio_time_left: float = 0.0
+var _frightened_ghost_eaten: bool = false
 
 func _ready() -> void:
 	print(Globals.respawned)
@@ -95,6 +102,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_eat_sound_cooldown -= delta
+	_update_frightened_audio(delta)
 
 	if is_dying:
 		velocity = Vector2.ZERO
@@ -261,6 +269,8 @@ func _on_startup_finished() -> void:
 	Globals.ghosts_can_move = true
 	readyUI.visible = false
 
+	_start_background()
+
 func _blink_maze(times: int = 4, interval: float = 0.15) -> void:
 	var mat := maze.material
 	if mat and mat is ShaderMaterial:
@@ -293,20 +303,32 @@ func _on_ghost_collision(ghost: Node) -> void:
 		return
 
 	is_dying = true
-	
+
+
+	if backgroundSound.playing:
+		backgroundSound.stop()
+	if PowerPelletSound.playing:
+		PowerPelletSound.stop()
+	if ghostEatenSound.playing:
+		ghostEatenSound.stop()
+	_frightened_audio_active = false
+
 	print("Pacman hit ghost: ", ghost.name)
 	velocity = Vector2.ZERO
 	_animated_sprite.play("stop")
-	deathSound.play()
 	await get_tree().create_timer(1.5).timeout
 	rotation_degrees = 0
 	_animated_sprite.play("death")
+	deathSound.play()
 	await _animated_sprite.animation_finished
+	await deathSound.finished
 	Globals.lives -= 1
 	get_tree().reload_current_scene()
 	Globals.respawned = true
 
 func _frighten_all(duration: float) -> void:
+	_start_power_pellet_bgm(duration)
+
 	for g in [blinky, pinky, inky, clyde]:
 		if is_instance_valid(g) and g.has_method("frighten"):
 			g.frighten(duration)
@@ -331,6 +353,7 @@ func _try_eat_ghost(ghost: Node) -> bool:
 
 func _eat_ghost(ghost: Node) -> void:
 	ghostSound.play()
+	_switch_to_ghost_eaten_bgm()
 	update_score(200)
 	ghost.call("eaten")
 
@@ -338,3 +361,53 @@ func _play_eat_sound() -> void:
 	if _eat_sound_cooldown <= 0.0:
 		eatSound.play()
 		_eat_sound_cooldown = EAT_SOUND_INTERVAL
+
+func _start_background() -> void:
+	if PowerPelletSound.playing:
+		PowerPelletSound.stop()
+	if ghostEatenSound.playing:
+		ghostEatenSound.stop()
+	if not backgroundSound.playing:
+		backgroundSound.play()
+
+func _update_frightened_audio(delta: float) -> void:
+	if not _frightened_audio_active:
+		return
+
+	_frightened_audio_time_left -= delta
+	if _frightened_audio_time_left <= 0.0:
+		_frightened_audio_active = false
+
+		# stop special bgm and resume normal
+		if PowerPelletSound.playing:
+			PowerPelletSound.stop()
+		if ghostEatenSound.playing:
+			ghostEatenSound.stop()
+
+		_start_background()
+
+func _start_power_pellet_bgm(duration: float) -> void:
+	_frightened_audio_active = true
+	_frightened_audio_time_left = duration
+	_frightened_ghost_eaten = false
+
+	# stop whatever bgm is currently running
+	if backgroundSound.playing:
+		backgroundSound.stop()
+	if ghostEatenSound.playing:
+		ghostEatenSound.stop()
+	if PowerPelletSound.playing:
+		PowerPelletSound.stop()
+
+	PowerPelletSound.play()
+
+func _switch_to_ghost_eaten_bgm() -> void:
+	if not _frightened_audio_active:
+		return
+
+	_frightened_ghost_eaten = true
+
+	if PowerPelletSound.playing:
+		PowerPelletSound.stop()
+	if not ghostEatenSound.playing:
+		ghostEatenSound.play()
