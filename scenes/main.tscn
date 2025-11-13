@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://d0te4yyd7y1hg"]
+[gd_scene load_steps=45 format=4 uid="uid://d0te4yyd7y1hg"]
 
 [ext_resource type="Texture2D" uid="uid://byxjh4tv4gp1x" path="res://assets/maze/Wall_Atlas.png" id="1_o5qli"]
 [ext_resource type="Shader" uid="uid://xgy4a3v3kwxa" path="res://shaders/maze_flash.gdshader" id="1_yc10j"]
@@ -21,6 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://cxh32pomdnac7" path="res://scenes/ghosts/pinky.tscn" id="16_yc10j"]
 [ext_resource type="PackedScene" uid="uid://ximx4bl1q54o" path="res://scenes/ghosts/clyde.tscn" id="17_jscy8"]
 [ext_resource type="PackedScene" uid="uid://20r5r43liib7" path="res://scenes/ghosts/inky.tscn" id="18_pm3ni"]
+[ext_resource type="AudioStream" uid="uid://brq41t7p12rrb" path="res://assets/sounds/pacman_eatfruit.wav" id="22_y6deb"]
+[ext_resource type="AudioStream" uid="uid://86y1isqvemn6" path="res://assets/sounds/pacman_eatghost.wav" id="23_og1vs"]
+[ext_resource type="AudioStream" uid="uid://b8uhgtl1mhuao" path="res://assets/sounds/pacman_death.wav" id="24_2wyq8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jscy8"]
 shader = ExtResource("1_yc10j")
@@ -432,6 +435,18 @@ position = Vector2(0, -83)
 
 [node name="Startup Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_jbj1t")
+volume_db = -20.0
+
+[node name="Fruit Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_y6deb")
+volume_db = -20.0
+
+[node name="Ghost Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_og1vs")
+volume_db = -20.0
+
+[node name="Death Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_2wyq8")
 volume_db = -20.0
 
 [editable path="Blinky"]

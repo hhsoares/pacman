@@ -45,6 +45,9 @@ var current_fruit: Node2D = null
 @onready var gameOverUI: Label = $"../Game Over"
 
 @onready var startupSound: AudioStreamPlayer = $"../Startup Sound"
+@onready var fruitSound: AudioStreamPlayer = $"../Fruit Sound"
+@onready var ghostSound: AudioStreamPlayer = $"../Ghost Sound"
+@onready var deathSound: AudioStreamPlayer = $"../Death Sound"
 
 func _ready() -> void:
 	print(Globals.respawned)
@@ -281,9 +284,11 @@ func _on_ghost_collision(ghost: Node) -> void:
 		return
 
 	is_dying = true
+	
 	print("Pacman hit ghost: ", ghost.name)
 	velocity = Vector2.ZERO
 	_animated_sprite.play("stop")
+	deathSound.play()
 	await get_tree().create_timer(1.5).timeout
 	rotation_degrees = 0
 	_animated_sprite.play("death")
@@ -318,5 +323,6 @@ func _try_eat_ghost(ghost: Node) -> bool:
 
 
 func _eat_ghost(ghost: Node) -> void:
+	ghostSound.play()
 	update_score(200)
 	ghost.call("eaten")

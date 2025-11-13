@@ -15,4 +15,5 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Pacman:
 		body.update_score(score_value)
+		body.fruitSound.play()
 		queue_free()
