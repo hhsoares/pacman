@@ -40,9 +40,9 @@ func physics_update(delta: float) -> void:
 	if remaining <= blink_threshold:
 		if anim.animation != "blinking":
 			anim.play("blinking")
-		else:
-			if anim.animation != "blue":
-				anim.play("blue")
+	else:
+		if anim.animation != "blue":
+			anim.play("blue")
 	
 	if _time >= duration:
 		state_machine.change_state("chase")

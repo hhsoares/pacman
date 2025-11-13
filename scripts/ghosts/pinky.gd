@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 		return
 	if is_frightened:
 		return
-
+		
 	if direction == Vector2.LEFT:
 		_animated_sprite.play("left")
 	elif direction == Vector2.RIGHT:
