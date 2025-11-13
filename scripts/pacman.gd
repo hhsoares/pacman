@@ -110,10 +110,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		_animated_sprite.play("moving")
 
-	if Globals.lives <= 0:
-		gameOverUI.visible = true
-	else:
-		gameOverUI.visible = false
+#	if Globals.lives <= 0:
+#		gameOverUI.visible = true
+#	else:
+#		gameOverUI.visible = false
 
 	move_and_slide()
 	_check_ghost_collision()
