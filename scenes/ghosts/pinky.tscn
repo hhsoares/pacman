@@ -151,8 +151,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f57jd"]
-size = Vector2(14, 14)
+[sub_resource type="CircleShape2D" id="CircleShape2D_6453t"]
+radius = 7.0
 
 [node name="Pinky" type="CharacterBody2D"]
 script = ExtResource("1_3uwyp")
@@ -162,7 +162,7 @@ sprite_frames = SubResource("SpriteFrames_2s471")
 animation = &"blinking"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_f57jd")
+shape = SubResource("CircleShape2D_6453t")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_06ifc")
