@@ -23,9 +23,22 @@ func _physics_process(delta: float) -> void:
 	elif direction == Vector2.DOWN:
 		_animated_sprite.play("down")
 
-func frighten(seconds: float) -> void:
-	# pass duration to state; simplest via exported property
-	var frightened_state: Node = state_machine.states.get("frightened")
-	if frightened_state:
-		frightened_state.duration = seconds
+func frighten(duration: float) -> void:
+	if not is_instance_valid(state_machine):
+		return
+	if state_machine.current_state == null:
+		return
+
+	var current: State = state_machine.current_state
+	var current_name: String = current.name.to_lower()
+
+	# don't frighten if still in box/start logic
+	if current_name == "start" or current_name == "spawn":
+		return
+
+	var frightened_state: State = state_machine.states.get("frightened") as State
+	if frightened_state == null:
+		return
+
+	frightened_state.duration = duration
 	state_machine.change_state("frightened")
