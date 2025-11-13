@@ -171,6 +171,7 @@ func check_pellet() -> void:
 			update_score(10)
 		"big":
 			update_score(50)
+			_frighten_all(6.0)
 
 	pellets.erase_cell(cell)
 
@@ -283,3 +284,8 @@ func _on_ghost_collision(ghost: Node) -> void:
 	Globals.lives -= 1
 	get_tree().reload_current_scene()
 	Globals.respawned = true
+
+func _frighten_all(duration: float) -> void:
+	for g in [blinky, pinky, inky, clyde]:
+		if is_instance_valid(g) and g.has_method("frighten"):
+			g.frighten(duration)
