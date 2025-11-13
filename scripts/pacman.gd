@@ -270,6 +270,13 @@ func _check_ghost_collision() -> void:
 			break
 
 func _on_ghost_collision(ghost: Node) -> void:
+	# if this ghost is already eaten, ignore collision completely
+	if ghost.has_method("eaten") and bool(ghost.get("is_eaten")):
+		return
+
+	if _try_eat_ghost(ghost):
+		return
+
 	if is_dying:
 		return
 
@@ -289,3 +296,27 @@ func _frighten_all(duration: float) -> void:
 	for g in [blinky, pinky, inky, clyde]:
 		if is_instance_valid(g) and g.has_method("frighten"):
 			g.frighten(duration)
+
+func _try_eat_ghost(ghost: Node) -> bool:
+	if not ghost.has_method("eaten"):
+		return false
+
+	var is_frightened: bool = bool(ghost.get("is_frightened"))
+	var is_eaten_flag: bool = bool(ghost.get("is_eaten"))
+
+	# optional: remove this print when you're done testing
+	print("Ghost collision:", ghost.name,
+		" frightened:", is_frightened,
+		" eaten:", is_eaten_flag)
+
+	if is_frightened and not is_eaten_flag:
+		_eat_ghost(ghost)
+		return true
+
+	return false
+
+
+
+func _eat_ghost(ghost: Node) -> void:
+	update_score(200)
+	ghost.call("eaten")

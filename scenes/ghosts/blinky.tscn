@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cdwba6wkotyrw"]
+[gd_scene load_steps=28 format=3 uid="uid://cdwba6wkotyrw"]
 
 [ext_resource type="Texture2D" uid="uid://buhk6nqtog6ih" path="res://assets/ghosts/blinky.png" id="1_8lv0q"]
 [ext_resource type="Script" uid="uid://djg42fo23dw4y" path="res://scripts/ghosts/blinky.gd" id="1_gl5t1"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c06wieabqbued" path="res://scripts/ghosts/states/chase.gd" id="6_d0emu"]
 [ext_resource type="Script" uid="uid://d142jxnn0eqlq" path="res://scripts/ghosts/states/spawn.gd" id="7_dip1j"]
 [ext_resource type="Script" uid="uid://b0covx4s1chnj" path="res://scripts/ghosts/states/frightened.gd" id="10_2s471"]
+[ext_resource type="Script" uid="uid://c8ps8v55u1b8k" path="res://scripts/ghosts/states/eaten.gd" id="11_f57jd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f57jd"]
 atlas = ExtResource("2_iopke")
@@ -158,7 +159,7 @@ script = ExtResource("1_gl5t1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2s471")
-animation = &"blinking"
+animation = &"blue"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f57jd")
@@ -181,3 +182,6 @@ script = ExtResource("7_dip1j")
 
 [node name="Frightened" type="Node" parent="StateMachine"]
 script = ExtResource("10_2s471")
+
+[node name="Eaten" type="Node" parent="StateMachine"]
+script = ExtResource("11_f57jd")

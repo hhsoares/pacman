@@ -6,6 +6,7 @@ class_name Inky
 @export var speed: float = 100.0
 var direction: Vector2 = Vector2.UP
 var is_frightened: bool = false
+var is_eaten: bool = false
 
 func _physics_process(delta: float) -> void:
 	if not Globals.ghosts_can_move:
@@ -42,3 +43,9 @@ func frighten(duration: float) -> void:
 
 	frightened_state.duration = duration
 	state_machine.change_state("frightened")
+
+func eaten() -> void:
+	if not is_instance_valid(state_machine):
+		return
+
+	state_machine.change_state("eaten")

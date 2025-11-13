@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cxh32pomdnac7"]
+[gd_scene load_steps=28 format=3 uid="uid://cxh32pomdnac7"]
 
 [ext_resource type="Script" uid="uid://dk1l6mkemcal" path="res://scripts/ghosts/pinky.gd" id="1_3uwyp"]
 [ext_resource type="Texture2D" uid="uid://c4hdr0qmbin2b" path="res://assets/ghosts/pinky.png" id="1_7esn6"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c06wieabqbued" path="res://scripts/ghosts/states/chase.gd" id="6_vwbs3"]
 [ext_resource type="Script" uid="uid://d142jxnn0eqlq" path="res://scripts/ghosts/states/spawn.gd" id="7_tdrqj"]
 [ext_resource type="Script" uid="uid://b0covx4s1chnj" path="res://scripts/ghosts/states/frightened.gd" id="8_ptpwf"]
+[ext_resource type="Script" uid="uid://c8ps8v55u1b8k" path="res://scripts/ghosts/states/eaten.gd" id="11_6453t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjnix"]
 atlas = ExtResource("2_g4a2f")
@@ -181,3 +182,6 @@ script = ExtResource("7_tdrqj")
 
 [node name="Frightened" type="Node" parent="StateMachine"]
 script = ExtResource("8_ptpwf")
+
+[node name="Eaten" type="Node" parent="StateMachine"]
+script = ExtResource("11_6453t")
